@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMAE - Plataforma Educativa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="mobile-frame" id="app-frame">
+
+    <!-- ========================================== -->
+    <!-- BANNER MODO VISITA (oculto por defecto)    -->
+    <!-- ========================================== -->
+     git
+    <div id="banner-visita" class="banner-visita" style="display: none;">
+        <span>👁️ Modo Visita - Acceso limitado</span>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: LOGIN                            -->
+    <!-- ========================================== -->
+    <section id="login" class="screen active">
+        <header class="login-header">
+            <div class="logo-container">
+                <div class="logo-icon"><img src="Logo emae.png" height="120px" alt=""></div>
+                <img src="EmaeLetra.png" width="120px" alt="">
+                <p>Tu carrera, en un solo lugar</p>
+            </div>
+        </header>
+        <main class="login-main">
+            <h2>Iniciar sesión</h2>
+            <form id="form-login">
+                <div class="input-group">
+                    <span class="input-icon">🧑🏻</span>
+                    <input type="text" id="username" placeholder="usuario" required autocomplete="username">
+                </div>
+                <div class="input-group">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" id="password" placeholder="contraseña" required autocomplete="current-password">
+                </div>
+                <div id="error-message" class="error-message" style="display: none;"></div>
+                <a href="#" class="link">¿Olvidaste tu contraseña?</a>
+                <button type="submit" class="btn-primary">Ingresar</button>
+            </form>
+            <p class="register-link">¿No tenés una cuenta? <a href="#">COMUNICATE CON SECRETARÍA</a></p>
+            <div class="demo-hint">
+                <strong>Usuarios:</strong> profesor1-4 (profesor) / alumno1-4 (alumno) / cualquier otro = visita 
+            </div>
+        </main>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: BIENVENIDA                       -->
+    <!-- ========================================== -->
+    <section id="welcome" class="screen">
+        <main class="welcome-main">
+            <div class="welcome-illustration">
+                <div class="illustration-content">
+                    <span class="illustration-icon">💻</span>
+                    <div class="floating-elements">
+                        <span class="float-icon">📚</span>
+                        <span class="float-icon">📅</span>
+                        <span class="float-icon">🎓</span>
+                    </div>
+                </div>
+            </div>
+            <h2>Bienvenido/a a EMAE</h2>
+            <p>Accedé a tu calendario, materias, novedades y mucho más. Todo en un solo lugar.</p>
+            <div class="pagination-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <button class="btn-primary" id="btn-siguiente">Siguiente</button>
+        </main>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: BIENVENIDA (invitado)            -->
+    <!-- ========================================== -->
+    <section id="welcome-visita" class="screen">
+        <main class="welcome-main">
+            <div class="welcome-illustration">
+                <div class="illustration-content">
+                    <span class="illustration-icon">👁️</span>
+                    <div class="floating-elements">
+                        <span class="float-icon">🔒</span>
+                        <span class="float-icon">📖</span>
+                        <span class="float-icon">🔑</span>
+                    </div>
+                </div>
+            </div>
+            <h2>Estás en modo visita</h2>
+            <p>Podés explorar EMAE libremente, pero para ver tus materias, notas, novedades y calendario necesitás iniciar sesión con tu usuario.</p>
+            <div class="pagination-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+            </div>
+            <button class="btn-primary" id="btn-siguiente-visita">Entendido</button>
+        </main>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: HOME VISITA (limitado)           -->
+    <!-- ========================================== -->
+    <section id="home-visita" class="screen">
+        <header>
+            <h2>EMAE</h2>
+        </header>
+        <main>
+            <div class="aviso-visita">
+                <span class="aviso-icon">👁️</span>
+                <p>Estás navegando en <strong>modo visita</strong>. Iniciá sesión para acceder a toda la información.</p>
+            </div>
+            <div class="grid-menu">
+                <button class="menu-item" data-target="welcome-visita">
+                    <span class="menu-icon">ℹ️</span>
+                    <span>Sobre EMAE</span>
+                </button>
+                <button class="menu-item disabled" aria-disabled="true">
+                    <span class="menu-icon">🔒</span>
+                    <span>Materias</span>
+                </button>
+                <button class="menu-item disabled" aria-disabled="true">
+                    <span class="menu-icon">🔒</span>
+                    <span>Novedades</span>
+                </button>
+                <button class="menu-item disabled" aria-disabled="true">
+                    <span class="menu-icon">🔒</span>
+                    <span>Calendario</span>
+                </button>
+            </div>
+            <button class="btn-secondary" id="btn-ir-login" style="margin-top: 20px;">Iniciar sesión</button>
+        </main>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: HOME ALUMNO (genérico dinámico)  -->
+    <!-- ========================================== -->
+    <section id="home-alumno" class="screen pantalla-alumno">
+        <header>
+            <button class="btn-icon" aria-label="Menú">☰</button>
+            <h2 id="alumno-saludo">Hola!</h2>
+        </header>
+        <main>
+            <img class="banner-imagen-carrera" id="alumno-banner-img" src="" alt="">
+            <div class="banner-carrera" id="alumno-banner-carrera">
+                <span class="banner-text" id="alumno-nombre-carrera">Carrera</span>
+            </div>
+            <nav class="grid-menu" aria-label="Menú principal">
+                <button class="menu-item" data-target="calendar-alumno">
+                    <span class="menu-icon">📅</span>
+                    <span>Calendario</span>
+                </button>
+                <button class="menu-item" data-target="subjects-alumno">
+                    <span class="menu-icon">📚</span>
+                    <span>Materias</span>
+                </button>
+                <button class="menu-item" data-target="news-alumno">
+                    <span class="menu-icon">🔔</span>
+                    <span>Novedades</span>
+                </button>
+                <button class="menu-item">
+                    <span class="menu-icon">🕐</span>
+                    <span>Horarios</span>
+                </button>
+                <button class="menu-item">
+                    <span class="menu-icon">🏫</span>
+                    <span>Institucional</span>
+                </button>
+                <button class="menu-item" data-target="payment">
+                    <span class="menu-icon">💳</span>
+                    <span>Pagos</span>
+                </button>
+            </nav>
+            <div class="card">
+                <h3>Próximo evento</h3>
+                <p id="alumno-proximo-evento">Cargando...</p>
+            </div>
+        </main>
+        <nav class="bottom-nav" aria-label="Navegación inferior">
+            <button class="nav-item active" data-target="home-alumno"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-alumno"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="calendar-alumno"><span class="nav-icon">📅</span><span>Calendario</span></button>
+            <button class="nav-item" data-target="profile-alumno"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: MATERIAS ALUMNO                  -->
+    <!-- ========================================== -->
+    <section id="subjects-alumno" class="screen pantalla-alumno">
+        <header>
+            <h2>Materias</h2>
+            <button class="btn-search" aria-label="Buscar">🔍</button>
+        </header>
+        <main>
+            <div class="filter-tabs">
+                <button class="filter-tab">CUATRIMESTRE 1</button>
+                <button class="filter-tab active">CUATRIMESTRE 2</button>
+            </div>
+            <div class="list" id="alumno-lista-materias">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-alumno"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item active" data-target="subjects-alumno"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="calendar-alumno"><span class="nav-icon">📅</span><span>Calendario</span></button>
+            <button class="nav-item" data-target="profile-alumno"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: DETALLE MATERIA                  -->
+    <!-- ========================================== -->
+    <section id="subject-detail" class="screen pantalla-alumno">
+        <header>
+            <button class="btn-back" id="btn-back-subjects">←</button>
+            <h2>Detalle de materia</h2>
+        </header>
+        <main>
+            <div class="subject-header-card">
+                <div class="subject-icon-large" id="detail-icon">💻</div>
+                <div class="subject-info">
+                    <h3 id="detail-nombre">Programación Web</h3>
+                    <p id="detail-profesor">Profesor: Juan Pérez</p>
+                    <p class="subject-meta">Cuatrimestre 1</p>
+                </div>
+            </div>
+            <div class="tabs" role="tablist">
+                <button class="tab active" role="tab">Información</button>
+                <button class="tab" role="tab">Notas</button>
+                <button class="tab" role="tab">Faltas</button>
+            </div>
+            <div class="tab-content">
+                <h4>Registros de falta</h4>
+                <ul class="list-simple">
+                    <li><span>Clase 1 - 02/04</span><span class="status absent">Ausente</span></li>
+                    <li><span>Clase 2 - 09/04</span><span class="status present">Presente</span></li>
+                    <li><span>Clase 3 - 16/04</span><span class="status absent">Ausente</span></li>
+                    <li><span>Clase 4 - 23/04</span><span class="status present">Presente</span></li>
+                    <li><span>Clase 5 - 30/04</span><span class="status absent">Ausente</span></li>
+                </ul>
+                <div class="grades-summary">
+                    <div class="grades-icon">📊</div>
+                    <div class="grades-info"><strong>Total de faltas</strong><span>3/12</span></div>
+                </div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-alumno"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-alumno"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="calendar-alumno"><span class="nav-icon">📅</span><span>Calendario</span></button>
+            <button class="nav-item" data-target="profile-alumno"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: NOVEDADES ALUMNO (solo lectura)  -->
+    <!-- ========================================== -->
+    <section id="news-alumno" class="screen pantalla-alumno">
+        <header>
+            <h2>Novedades</h2>
+            <button class="btn-search" aria-label="Buscar">🔍</button>
+        </header>
+        <main>
+            <div class="filter-tabs">
+                <button class="filter-tab active">Todas</button>
+                <button class="filter-tab">Académicas</button>
+                <button class="filter-tab">Institucionales</button>
+            </div>
+            <!-- Los alumnos NO tienen botón "Agregar Novedad" -->
+            <div class="news-list" id="alumno-lista-novedades">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-alumno"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-alumno"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="calendar-alumno"><span class="nav-icon">📅</span><span>Calendario</span></button>
+            <button class="nav-item" data-target="profile-alumno"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: CALENDARIO ALUMNO                -->
+    <!-- ========================================== -->
+    <section id="calendar-alumno" class="screen pantalla-alumno">
+        <header>
+            <h2>Calendario</h2>
+            <button class="btn-search" aria-label="Buscar">🔍</button>
+        </header>
+        <main>
+            <div class="calendar-header">
+                <button class="btn-calendar-nav">←</button>
+                <h3>SEPTIEMBRE 2026</h3>
+                <button class="btn-calendar-nav">→</button>
+            </div>
+            <div class="calendar-view-tabs">
+                <button class="view-tab active">Mes</button>
+                <button class="view-tab">Semana</button>
+                <button class="view-tab">Agenda</button>
+            </div>
+            <div class="calendar-grid">
+                <div class="calendar-day-header">Lun</div><div class="calendar-day-header">Mar</div>
+                <div class="calendar-day-header">Mié</div><div class="calendar-day-header">Jue</div>
+                <div class="calendar-day-header">Vie</div><div class="calendar-day-header">Sáb</div>
+                <div class="calendar-day-header">Dom</div>
+                <div class="calendar-day">30</div>
+                <div class="calendar-day">1</div><div class="calendar-day">2</div><div class="calendar-day">3</div>
+                <div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div>
+                <div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div>
+                <div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div>
+                <div class="calendar-day">13</div><div class="calendar-day">14</div>
+                <div class="calendar-day">15</div><div class="calendar-day">16</div><div class="calendar-day">17</div>
+                <div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div>
+                <div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div>
+                <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div>
+                <div class="calendar-day">27</div><div class="calendar-day today">28</div>
+                <div class="calendar-day">29</div><div class="calendar-day">30</div>
+                <div class="calendar-day">1</div><div class="calendar-day">2</div>
+                <div class="calendar-day">3</div><div class="calendar-day">4</div>
+            </div>
+            <div class="events-list" id="alumno-lista-eventos">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-alumno"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-alumno"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item active" data-target="calendar-alumno"><span class="nav-icon">📅</span><span>Calendario</span></button>
+            <button class="nav-item" data-target="profile-alumno"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: PAGO DE CUOTA                    -->
+    <!-- ========================================== -->
+    <section id="payment" class="screen pantalla-alumno">
+        <header>
+            <h2>Pago de cuota</h2>
+            <button class="btn-search" aria-label="Buscar"></button>
+        </header>
+        <main>
+            <div class="payment-status-card">
+                <div class="payment-icon">💳</div>
+                <div class="payment-info">
+                    <h3>Cuota actual</h3>
+                    <p class="payment-due">Vencimiento: 15/10/2026</p>
+                    <p class="payment-amount">Monto: $120.000</p>
+                    <span class="payment-badge">Pendiente</span>
+                </div>
+            </div>
+            <h3 class="section-subtitle">Medios de pago</h3>
+            <div class="payment-methods">
+                <button class="payment-method">
+                    <span class="method-icon">💳</span>
+                    <div class="method-info"><strong>Tarjeta de crédito / débito</strong><small>Visa - BBVA - Mastercard - Galicia</small></div>
+                </button>
+                <button class="payment-method">
+                    <span class="method-icon">🏦</span>
+                    <div class="method-info"><strong>Transferencia bancaria</strong><small>CBU: 3220001888043635390018</small></div>
+                </button>
+                <button class="payment-method">
+                    <span class="method-icon">📱</span>
+                    <div class="method-info"><strong>Mercado Pago</strong><small>Pago con QR o alias</small></div>
+                </button>
+            </div>
+            <button class="btn-primary" id="btn-generar-comprobante">CONFIRMAR MEDIO DE PAGO</button>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-alumno"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-alumno"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="calendar-alumno"><span class="nav-icon">📅</span><span>Calendario</span></button>
+            <button class="nav-item" data-target="profile-alumno"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: PERFIL ALUMNO                    -->
+    <!-- ========================================== -->
+    <section id="profile-alumno" class="screen pantalla-alumno">
+        <header><h2>Perfil</h2></header>
+        <main>
+            <div class="profile-header">
+                <div class="avatar-placeholder">
+                    <span class="avatar-icon">👤</span>
+                    <button class="btn-edit-avatar" aria-label="Editar foto">📷</button>
+                </div>
+                <h3 id="alumno-nombre-perfil">Alumno</h3>
+                <p class="profile-email" id="alumno-carrera-perfil">Carrera</p>
+            </div>
+            <nav class="menu-list" aria-label="Opciones de perfil">
+                <button class="list-item"><span class="list-icon">👤</span><span>Modificar datos</span><span class="arrow">›</span></button>
+                <button class="list-item"><span class="list-icon">🔔</span><span>Notificaciones</span><span class="arrow">›</span></button>
+                <button class="list-item"><span class="list-icon">⚙️</span><span>Configuración</span><span class="arrow">›</span></button>
+                <button class="list-item"><span class="list-icon">❓</span><span>Ayuda y soporte</span><span class="arrow">›</span></button>
+                <button class="list-item"><span class="list-icon">ℹ️</span><span>Sobre EMAE</span><span class="arrow">›</span></button>
+            </nav>
+            <button class="btn-danger" id="btn-logout-alumno">Cerrar sesión</button>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-alumno"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-alumno"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="calendar-alumno"><span class="nav-icon">📅</span><span>Calendario</span></button>
+            <button class="nav-item active" data-target="profile-alumno"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLAS PROFESOR (una por carrera)       -->
+    <!-- Cada una tiene clase "carrera-{alias}"     -->
+    <!-- ========================================== -->
+
+    <!-- PROFESOR 1 - INSTRUMENTACIÓN QUIRÚRGICA -->
+    <section id="home-profesor1" class="screen pantalla-profesor carrera-instrumentacion">
+        <header class="header-profesor">
+            <button class="btn-icon"></button>
+            <h2>Hola, Profesor</h2>
+        </header>
+        <main>
+            <img class="banner-imagen-carrera" src="banner-instrumentacion.jpg" height="200px" alt="Instrumentación Quirúrgica">
+            <div class="carrera-badge">Instrumentación Quirúrgica</div>
+            <div class="grid-menu">
+                <button class="menu-item" data-target="calendar-prof1"><span class="menu-icon">📅</span><span>Calendario</span></button>
+                <button class="menu-item"><span class="menu-icon">👥</span><span>Alumnos</span></button>
+                <button class="menu-item" data-target="grades-prof1"><span class="menu-icon">📝</span><span>Notas</span></button>
+                <button class="menu-item" data-target="news-prof1"><span class="menu-icon">📢</span><span>Novedades</span></button>
+            </div>
+            <div class="card"><h3>Próxima clase</h3><p>Instrumentación Quirúrgica I - 28/09 - 18:00 hs - Lab 1</p></div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-target="home-profesor1"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof1"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof1"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="subjects-prof1" class="screen pantalla-profesor carrera-instrumentacion">
+        <header><h2>Mis Materias</h2></header>
+        <main>
+            <div class="carrera-badge">Instrumentación Quirúrgica</div>
+            <div class="list">
+                <button class="list-item"><span class="list-icon">⚕️</span><div class="text"><strong>Primeros Auxilios</strong><small>Turno Mañana - 8 alumnos</small></div></button>
+                <button class="list-item"><span class="list-icon">🩺</span><div class="text"><strong>Química biológica</strong><small>Turno Mañana - 7 alumnos</small></div></button>
+                <button class="list-item"><span class="list-icon">⚕️</span><div class="text"><strong>Instrumentación Quirúrgica I</strong><small>Turno Mañana - 12 alumnos</small></div></button>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor1"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item active" data-target="subjects-prof1"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof1"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="grades-prof1" class="screen pantalla-profesor carrera-instrumentacion">
+        <header><button class="btn-back" data-back="home-profesor1">←</button><h2>Cargar Notas</h2></header>
+        <main>
+            <div class="carrera-badge">Instrumentación Quirúrgica</div>
+            <h3>Primer Parcial - Instrumentación Quirúrgica I</h3>
+            <form class="form-grades">
+                <div class="list-grades">
+                    <div class="grade-item"><span>Alumno 1</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 2</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 3</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 4</span><input type="number" min="1" max="10"></div>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Notas</button>
+            </form>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor1"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof1"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item active" data-target="grades-prof1"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="news-prof1" class="screen pantalla-profesor carrera-instrumentacion">
+        <header><h2>Novedades</h2></header>
+        <main>
+            <div class="carrera-badge">Instrumentación Quirúrgica</div>
+            <!-- SOLO PROFESORES pueden agregar novedades -->
+            <button class="btn-secondary btn-agregar-novedad">➕ Agregar Novedad</button>
+            <div class="news-list">
+                <div class="news-item"><div class="news-icon">🗒️</div><div class="news-content"><h4>Examen práctico</h4><p>15/10/2025 - Laboratorio</p><span class="news-date">Faltan 17 días</span></div></div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor1"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof1"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof1"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="calendar-prof1" class="screen pantalla-profesor carrera-instrumentacion">
+        <header><h2>Calendario</h2></header>
+        <main>
+            <div class="carrera-badge">Instrumentación Quirúrgica</div>
+            <div class="events-list">
+                <div class="event-item"><div class="event-icon">📅</div><div class="event-content"><strong>Clase práctica</strong><small>22/09 - 14:00 hs</small></div></div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor1"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof1"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof1"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- PROFESOR 2 - ADMINISTRACIÓN DE EMPRESAS -->
+    <section id="home-profesor2" class="screen pantalla-profesor carrera-administracion">
+        <header class="header-profesor"><button class="btn-icon">☰</button><h2>Hola, Profesor</h2></header>
+        <main>
+            <img class="banner-imagen-carrera" src="banner-administracion.jpg" alt="Administración de Empresas">
+            <div class="carrera-badge">Administración de Empresas</div>
+            <div class="grid-menu">
+                <button class="menu-item" data-target="calendar-prof2"><span class="menu-icon">📅</span><span>Calendario</span></button>
+                <button class="menu-item"><span class="menu-icon">👥</span><span>Alumnos</span></button>
+                <button class="menu-item" data-target="grades-prof2"><span class="menu-icon">📝</span><span>Notas</span></button>
+                <button class="menu-item" data-target="news-prof2"><span class="menu-icon">📢</span><span>Novedades</span></button>
+            </div>
+            <div class="card"><h3>Próxima clase</h3><p>Administración General- 28/09 - 19:00 hs</p></div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-target="home-profesor2"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof2"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof2"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="subjects-prof2" class="screen pantalla-profesor carrera-administracion">
+        <header><h2>Mis Materias</h2></header>
+        <main>
+            <div class="carrera-badge">Administración de Empresas</div>
+            <div class="list">
+                <button class="list-item"><span class="list-icon">💼</span><div class="text"><strong>Administración General</strong><small>Turno Tarde - 12 alumnos</small></div></button>
+                <button class="list-item"><span class="list-icon">🗒️</span><div class="text"><strong>Teoría Contable</strong><small>Turno Tarde - 14 alumnos</small></div></button>
+                <button class="list-item"><span class="list-icon">🧮</span><div class="text"><strong>Análisis matemático</strong><small>Turno Tarde - 10 alumnos</small></div></button>
+                <button class="list-item"><span class="list-icon">💰</span><div class="text"><strong>Gestión de costos</strong><small>Turno Tarde - 8 alumnos</small></div></button>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor2"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item active" data-target="subjects-prof2"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof2"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="grades-prof2" class="screen pantalla-profesor carrera-administracion">
+        <header><button class="btn-back" data-back="home-profesor2">←</button><h2>Cargar Notas</h2></header>
+        <main>
+            <div class="carrera-badge">Administración de Empresas</div>
+            <h3>Primer Parcial - Administración General</h3>
+            <form class="form-grades">
+                <div class="list-grades">
+                    <div class="grade-item"><span>Alumno 1</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 2</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 3</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 4</span><input type="number" min="1" max="10"></div>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Notas</button>
+            </form>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor2"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof2"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item active" data-target="grades-prof2"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="news-prof2" class="screen pantalla-profesor carrera-administracion">
+        <header><h2>Novedades</h2></header>
+        <main>
+            <div class="carrera-badge">Administración de Empresas</div>
+            <button class="btn-secondary btn-agregar-novedad">➕ Agregar Novedad</button>
+            <div class="news-list">
+                <div class="news-item"><div class="news-icon">📢</div><div class="news-content"><h4>Trabajo práctico grupal</h4><p>Entrega: 30/09/2025</p><span class="news-date">Hace 3 días</span></div></div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor2"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof2"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof2"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="calendar-prof2" class="screen pantalla-profesor carrera-administracion">
+        <header><h2>Calendario</h2></header>
+        <main>
+            <div class="carrera-badge">Administración de Empresas</div>
+            <div class="events-list">
+                <div class="event-item"><div class="event-icon"></div><div class="event-content"><strong>Clase teórica</strong><small>22/09 - 18:00 hs</small></div></div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor2"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof2"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof2"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- PROFESOR 3 - ENFERMERÍA -->
+    <section id="home-profesor3" class="screen pantalla-profesor carrera-enfermeria">
+        <header class="header-profesor"><button class="btn-icon">☰</button><h2>Hola, Profesor</h2></header>
+        <main>
+            <img class="banner-imagen-carrera" src="banner-enfermeria.jpg" alt="Enfermería">
+            <div class="carrera-badge">Enfermería</div>
+            <div class="grid-menu">
+                <button class="menu-item" data-target="calendar-prof3"><span class="menu-icon">📅</span><span>Calendario</span></button>
+                <button class="menu-item"><span class="menu-icon">👥</span><span>Alumnos</span></button>
+                <button class="menu-item" data-target="grades-prof3"><span class="menu-icon">📝</span><span>Notas</span></button>
+                <button class="menu-item" data-target="news-prof3"><span class="menu-icon">📢</span><span>Novedades</span></button>
+            </div>
+            <div class="card"><h3>Próxima clase</h3><p>Fundamentos de Enfermería - 22/09 - 10:00 hs</p></div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-target="home-profesor3"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof3"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof3"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="subjects-prof3" class="screen pantalla-profesor carrera-enfermeria">
+        <header><h2>Mis Materias</h2></header>
+        <main>
+            <div class="carrera-badge">Enfermería</div>
+            <div class="list">
+                <button class="list-item"><span class="list-icon">⚕️</span><div class="text"><strong>Fundamentos de Enfermería</strong><small>Turno Mañana - 13 alumnos</small></div></button>
+                <button class="list-item"><span class="list-icon">💊</span><div class="text"><strong>Farmacología</strong><small>Turno Tarde - 12 alumnos</small></div></button>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor3"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item active" data-target="subjects-prof3"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof3"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="grades-prof3" class="screen pantalla-profesor carrera-enfermeria">
+        <header><button class="btn-back" data-back="home-profesor3">←</button><h2>Cargar Notas</h2></header>
+        <main>
+            <div class="carrera-badge">Enfermería</div>
+            <h3>Primer Parcial - Fundamentos de Enfermería</h3>
+            <form class="form-grades">
+                <div class="list-grades">
+                    <div class="grade-item"><span>Alumno 1</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 2</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 3</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 4</span><input type="number" min="1" max="10"></div>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Notas</button>
+            </form>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor3"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof3"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item active" data-target="grades-prof3"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="news-prof3" class="screen pantalla-profesor carrera-enfermeria">
+        <header><h2>Novedades</h2></header>
+        <main>
+            <div class="carrera-badge">Enfermería</div>
+            <button class="btn-secondary btn-agregar-novedad">➕ Agregar Novedad</button>
+            <div class="news-list">
+                <div class="news-item"><div class="news-icon">🏥</div><div class="news-content"><h4>Práctica en hospital</h4><p>20/10/2025 - Hospital Municipal</p><span class="news-date">Hace 5 días</span></div></div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor3"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof3"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof3"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="calendar-prof3" class="screen pantalla-profesor carrera-enfermeria">
+        <header><h2>Calendario</h2></header>
+        <main>
+            <div class="carrera-badge">Enfermería</div>
+            <div class="events-list">
+                <div class="event-item"><div class="event-icon"></div><div class="event-content"><strong>Clase práctica</strong><small>22/09 - 10:00 hs</small></div></div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor3"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof3"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof3"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- PROFESOR 4 - DISEÑO Y PROGRAMACIÓN WEB -->
+    <section id="home-profesor4" class="screen pantalla-profesor carrera-diseno">
+        <header class="header-profesor"><button class="btn-icon">☰</button><h2>Hola, Profesor</h2></header>
+        <main>
+            <img class="banner-imagen-carrera img-top" src="banner-diseño.png" alt="Diseño y Programación Web">
+            <div class="carrera-badge">Diseño y Programación Web</div>
+            <div class="grid-menu">
+                <button class="menu-item" data-target="calendar-prof4"><span class="menu-icon">📅</span><span>Calendario</span></button>
+                <button class="menu-item"><span class="menu-icon">👥</span><span>Alumnos</span></button>
+                <button class="menu-item" data-target="grades-prof4"><span class="menu-icon">📝</span><span>Notas</span></button>
+                <button class="menu-item" data-target="news-prof4"><span class="menu-icon">📢</span><span>Novedades</span></button>
+            </div>
+            <div class="card"><h3>Próxima clase</h3><p>Programación Web - 22/09 - 14:00 hs</p></div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-target="home-profesor4"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof4"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof4"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="subjects-prof4" class="screen pantalla-profesor carrera-diseno">
+        <header><h2>Mis Materias</h2></header>
+        <main>
+            <div class="carrera-badge">Diseño y Programación Web</div>
+            <div class="list">
+                <button class="list-item"><span class="list-icon">💻</span><div class="text"><strong>Programación Web</strong><small>Turno Tarde - 20 alumnos</small></div></button>
+                <button class="list-item"><span class="list-icon">🎨</span><div class="text"><strong>Diseño UX/UI</strong><small>Turno Noche - 15 alumnos</small></div></button>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor4"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item active" data-target="subjects-prof4"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof4"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="grades-prof4" class="screen pantalla-profesor carrera-diseno">
+        <header><button class="btn-back" data-back="home-profesor4">←</button><h2>Cargar Notas</h2></header>
+        <main>
+            <div class="carrera-badge">Diseño y Programación Web</div>
+            <h3>Primer Parcial - Programación Web</h3>
+            <form class="form-grades">
+                <div class="list-grades">
+                    <div class="grade-item"><span>Alumno 1</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 2</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 3</span><input type="number" min="1" max="10"></div>
+                    <div class="grade-item"><span>Alumno 4</span><input type="number" min="1" max="10"></div>
+                </div>
+                <button type="submit" class="btn-primary">Guardar Notas</button>
+            </form>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor4"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof4"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item active" data-target="grades-prof4"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="news-prof4" class="screen pantalla-profesor carrera-diseno">
+        <header><h2>Novedades</h2></header>
+        <main>
+            <div class="carrera-badge">Diseño y Programación Web</div>
+            <button class="btn-secondary btn-agregar-novedad">➕ Agregar Novedad</button>
+            <div class="news-list">
+                <div class="news-item"><div class="news-icon">📢</div><div class="news-content"><h4>Proyecto final</h4><p>Entrega: 15/11/2025</p><span class="news-date">Hace 1 semana</span></div></div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor4"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof4"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof4"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <section id="calendar-prof4" class="screen pantalla-profesor carrera-diseno">
+        <header><h2>Calendario</h2></header>
+        <main>
+            <div class="carrera-badge">Diseño y Programación Web</div>
+            <div class="events-list">
+                <div class="event-item"><div class="event-icon">📅</div><div class="event-content"><strong>Clase práctica</strong><small>22/09 - 14:00 hs</small></div></div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor4"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof4"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof4"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PANTALLA: PERFIL PROFESOR (genérico)       -->
+    <!-- ========================================== -->
+    <section id="profile-profesor" class="screen pantalla-profesor">
+        <header><h2>Perfil</h2></header>
+        <main>
+            <div class="profile-header">
+                <div class="avatar-placeholder"><span class="avatar-icon">👨‍</span></div>
+                <h3 id="profesor-nombre-perfil">Profesor</h3>
+                <p class="profile-email" id="profesor-carrera-perfil">Carrera</p>
+            </div>
+            <nav class="menu-list">
+                <button class="list-item"><span class="list-icon">👤</span><span>Modificar datos</span><span class="arrow">›</span></button>
+                <button class="list-item"><span class="list-icon">📢</span><span>Notificaciones</span><span class="arrow">›</span></button>
+                <button class="list-item"><span class="list-icon">⚙️</span><span>Configuración</span><span class="arrow">›</span></button>
+                <button class="list-item"><span class="list-icon">❓</span><span>Ayuda y soporte</span><span class="arrow">›</span></button>
+                <button class="list-item"><span class="list-icon">ℹ️</span><span>Sobre EMAE</span><span class="arrow">›</span></button>
+            </nav>
+            <button class="btn-danger" id="btn-logout-profesor">Cerrar sesión</button>
+        </main>
+        <nav class="bottom-nav">
+            <button class="nav-item" data-target="home-profesor1"><span class="nav-icon">🏠</span><span>Inicio</span></button>
+            <button class="nav-item" data-target="subjects-prof1"><span class="nav-icon">📚</span><span>Materias</span></button>
+            <button class="nav-item" data-target="grades-prof1"><span class="nav-icon">📝</span><span>Notas</span></button>
+            <button class="nav-item active" data-target="profile-profesor"><span class="nav-icon">👤</span><span>Perfil</span></button>
+        </nav>
+    </section>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

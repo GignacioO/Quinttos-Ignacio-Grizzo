@@ -1,0 +1,879 @@
+/* =========================================
+   RESET Y VARIABLES BASE
+   ========================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --primary-color: #0d9488;
+    --primary-dark: #0f766e;
+    --primary-light: #14b8a6;
+    --secondary-color: #f0fdfa;
+    --text-dark: #1e293b;
+    --text-medium: #475569;
+    --text-light: #94a3b8;
+    --bg-light: #f8fafc;
+    --bg-white: #ffffff;
+    --border-color: #e2e8f0;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: #e2e8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+/* =========================================
+   MARCO DEL CELULAR
+   ========================================= */
+.mobile-frame {
+    width: 375px;
+    height: 812px;
+    background-color: var(--bg-light);
+    border-radius: 40px;
+    border: 12px solid #1e293b;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   BANNER MODO VISITA
+   ========================================= */
+.banner-visita {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--warning-color);
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 100;
+}
+
+/* =========================================
+   ESTRUCTURA DE PANTALLAS
+   ========================================= */
+.screen {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.screen.active { display: flex; }
+
+header {
+    padding: 20px;
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+header h1, header h2 { font-size: 20px; font-weight: 700; color: var(--text-dark); }
+
+main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    padding-bottom: 90px;
+    /* Tinte de fondo con el color predominante de la carrera, a baja
+       opacidad. Se aplica en TODAS las pantallas (alumno y profesor)
+       porque #app-frame es el que lleva la clase .carrera-X. Las
+       tarjetas (bg-white, sólido) van arriba y no se ven afectadas. */
+    background-color: var(--bg-career, transparent);
+}
+main::-webkit-scrollbar { width: 4px; }
+main::-webkit-scrollbar-thumb { background: var(--text-light); border-radius: 4px; }
+
+/* =========================================
+   NAVEGACIÓN INFERIOR
+   ========================================= */
+.bottom-nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background: var(--bg-white);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 10;
+}
+.nav-item {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    font-weight: 500;
+}
+.nav-icon { font-size: 22px; }
+.nav-item.active { color: var(--primary-color); font-weight: 700; }
+
+/* =========================================
+   BOTONES
+   ========================================= */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+    margin-top: 10px;
+}
+.btn-primary:hover { background-color: var(--primary-dark); }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--primary-dark);
+    border: 1px solid var(--primary-light);
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+}
+.btn-secondary:hover { background-color: #ccfbf1; }
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.btn-danger:hover { background-color: #dc2626; }
+
+.btn-icon, .btn-back {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+.btn-search { background: none; border: none; font-size: 20px; cursor: pointer; }
+.btn-calendar-nav { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--primary-color); }
+
+/* =========================================
+   FORMULARIOS
+   ========================================= */
+form { margin-top: 20px; }
+label { display: block; font-size: 14px; color: var(--text-medium); margin-bottom: 6px; font-weight: 500; }
+
+input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    margin-bottom: 16px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: var(--bg-white);
+}
+input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--secondary-color);
+}
+
+.input-group { position: relative; margin-bottom: 16px; }
+.input-group input { margin-bottom: 0; padding-left: 45px; }
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+.link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+}
+.link:hover { text-decoration: underline; }
+
+.register-link { text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-medium); }
+.register-link a { color: var(--primary-color); text-decoration: none; font-weight: 600; }
+
+.demo-hint {
+    margin-top: 30px;
+    padding: 12px;
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #92400e;
+    text-align: center;
+}
+
+/* =========================================
+   LOGIN
+   ========================================= */
+.login-header {
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    border: none;
+    padding-top: 60px;
+}
+.logo-container { display: flex; flex-direction: column; align-items: center; }
+.logo-icon { font-size: 60px; margin-bottom: 10px; }
+.login-header h1 { color: var(--primary-color); font-size: 36px; margin-bottom: 5px; font-weight: 800; }
+.login-header p { color: var(--text-medium); font-size: 14px; }
+.login-main { padding: 20px; }
+
+.error-message {
+    background: #fee2e2;
+    color: var(--danger-color);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    border: 1px solid #fecaca;
+}
+
+/* =========================================
+   BIENVENIDA
+   ========================================= */
+.welcome-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+.welcome-illustration {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--bg-light) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.illustration-content { position: relative; z-index: 2; }
+.illustration-icon { font-size: 100px; }
+.floating-elements { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+.float-icon {
+    position: absolute;
+    font-size: 30px;
+    animation: float 3s ease-in-out infinite;
+}
+.float-icon:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+.float-icon:nth-child(2) { top: 30%; right: 20%; animation-delay: 1s; }
+.float-icon:nth-child(3) { bottom: 20%; left: 30%; animation-delay: 2s; }
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+.welcome-main h2 { margin-bottom: 15px; color: var(--text-dark); font-size: 24px; }
+.welcome-main p { color: var(--text-medium); line-height: 1.6; margin-bottom: 30px; padding: 0 20px; }
+
+.pagination-dots { display: flex; gap: 8px; margin-bottom: 30px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-color); }
+.dot.active { background: var(--primary-color); width: 30px; border-radius: 5px; }
+
+/* =========================================
+   MODO VISITA
+   ========================================= */
+.aviso-visita {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.aviso-icon { font-size: 28px; }
+.aviso-visita p { font-size: 14px; color: #92400e; line-height: 1.5; }
+
+.menu-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--border-color);
+}
+
+/* =========================================
+   COMPONENTES COMUNES
+   ========================================= */
+.banner-imagen-carrera {
+    display: block;
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 16px;
+    margin-bottom: 16px;
+}
+/* La foto de Diseño tiene el título arriba: se recorta desde
+   abajo en vez del centro, para no taparlo */
+.banner-imagen-carrera.img-top {
+    object-position: center top;
+}
+
+.banner-carrera {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.banner-text { font-weight: 700; font-size: 18px; }
+
+.grid-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+.menu-item {
+    padding: 20px 10px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-medium);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.menu-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.menu-icon { font-size: 32px; }
+
+.card {
+    background: var(--bg-white);
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    margin-top: 20px;
+    box-shadow: var(--shadow-sm);
+}
+.card h3 { font-size: 16px; margin-bottom: 8px; color: var(--text-dark); }
+.card p { font-size: 14px; color: var(--text-medium); line-height: 1.5; }
+
+.list-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    padding: 16px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    margin-bottom: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.list-item:hover { background: var(--bg-light); border-color: var(--primary-light); }
+.list-icon { font-size: 28px; margin-right: 15px; }
+.list-item .text strong { display: block; font-size: 15px; color: var(--text-dark); margin-bottom: 4px; }
+.list-item .text small { font-size: 13px; color: var(--text-light); }
+
+.filter-tabs { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; }
+.filter-tab {
+    padding: 8px 16px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-medium);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+.filter-tab.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+
+/* Subject Detail */
+.subject-header-card {
+    background: var(--bg-white);
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.subject-icon-large { font-size: 50px; }
+.subject-info h3 { font-size: 18px; margin-bottom: 5px; }
+.subject-info p { font-size: 14px; color: var(--text-medium); margin-bottom: 3px; }
+.subject-meta { font-size: 12px; color: var(--text-light); }
+
+.tabs { display: flex; gap: 20px; border-bottom: 2px solid var(--border-color); margin: 20px 0; }
+.tab {
+    background: none;
+    border: none;
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+}
+.tab.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
+
+.list-simple { list-style: none; }
+.list-simple li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--text-medium);
+}
+.status { font-weight: 600; padding: 4px 12px; border-radius: 12px; font-size: 12px; }
+.status.present { color: var(--success-color); background: #d1fae5; }
+.status.absent { color: var(--danger-color); background: #fee2e2; }
+
+.grades-summary {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    background: var(--secondary-color);
+    border-radius: 12px;
+    border-left: 4px solid var(--color-accent, var(--primary-dark));
+    margin-top: 20px;
+}
+.grades-icon { font-size: 32px; }
+.grades-info { display: flex; flex-direction: column; }
+.grades-info strong { font-size: 14px; color: var(--text-dark); }
+.grades-info span { font-size: 18px; font-weight: 700; color: var(--primary-color); }
+
+/* News */
+.news-list { display: flex; flex-direction: column; gap: 12px; }
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 16px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+.news-item:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); }
+.news-icon { font-size: 28px; flex-shrink: 0; }
+.news-content { flex: 1; }
+.news-content h4 { font-size: 15px; margin-bottom: 5px; color: var(--text-dark); }
+.news-content p { font-size: 13px; color: var(--text-medium); margin-bottom: 5px; }
+.news-date { font-size: 12px; color: var(--text-light); }
+
+/* Calendar */
+.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.calendar-header h3 { font-size: 16px; color: var(--text-dark); }
+.calendar-view-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.view-tab {
+    flex: 1;
+    padding: 8px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-medium);
+    cursor: pointer;
+}
+.view-tab.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 25px;
+}
+.calendar-day-header { text-align: center; font-size: 12px; font-weight: 600; color: var(--text-light); padding: 8px 0; }
+.calendar-day {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--text-medium);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.calendar-day:hover { background: var(--secondary-color); }
+.calendar-day.today { background: var(--primary-color); color: white; font-weight: 700; }
+
+.events-list { margin-top: 20px; }
+.events-list h4 { font-size: 16px; margin-bottom: 15px; color: var(--text-dark); }
+.event-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+.event-icon { font-size: 24px; }
+.event-content strong { display: block; font-size: 14px; color: var(--text-dark); margin-bottom: 3px; }
+.event-content small { font-size: 12px; color: var(--text-light); }
+
+/* Payment */
+.payment-status-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+.payment-icon { font-size: 40px; }
+.payment-info h3 { font-size: 18px; margin-bottom: 8px; }
+.payment-due, .payment-amount { font-size: 14px; margin-bottom: 5px; opacity: 0.9; }
+.payment-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+.section-subtitle { font-size: 16px; margin-bottom: 15px; color: var(--text-dark); }
+.payment-methods { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.payment-method {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    transition: all 0.2s;
+}
+.payment-method:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); }
+.method-icon { font-size: 28px; }
+.method-info { flex: 1; }
+.method-info strong { display: block; font-size: 14px; color: var(--text-dark); margin-bottom: 3px; }
+.method-info small { font-size: 12px; color: var(--text-light); }
+
+/* Profile */
+.profile-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; padding: 20px 0; }
+.avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+.avatar-icon { font-size: 50px; }
+.btn-edit-avatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--primary-color);
+    border: 3px solid var(--bg-white);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+.profile-header h3 { font-size: 20px; margin-bottom: 5px; }
+.profile-email { color: var(--text-light); font-size: 14px; }
+.menu-list { display: flex; flex-direction: column; gap: 12px; }
+.menu-list .list-item { justify-content: space-between; }
+.arrow { font-size: 20px; color: var(--text-light); }
+
+/* Carrera Badge */
+.carrera-badge {
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.header-profesor {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+}
+.header-profesor h2 { color: white; }
+.header-profesor .btn-icon { color: white; }
+
+/* Grades */
+.list-grades { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.grade-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+.grade-item input { width: 70px; margin-bottom: 0; text-align: center; padding: 8px; }
+
+
+/* =========================================
+   IDENTIDAD VISUAL POR CARRERA
+   Cada alumno y profesor de una misma carrera reciben
+   exactamente el mismo tema: alcanza con redefinir estas
+   variables acá. El resto del archivo ya las usa en TODOS
+   lados (botones, badges, headers, nav activo, tabs,
+   calendario, hover de tarjetas...), así que con esto solo
+   se repinta toda la app, para alumnos y para profesores.
+
+   --bg-career es el tinte de fondo de baja opacidad que se
+   aplica en <main> (ver más arriba) para que se note a
+   simple vista en qué carrera se está, sin competir con el
+   texto (las tarjetas siguen siendo sólidas, encima).
+   ========================================= */
+
+/* 1. INSTRUMENTACIÓN QUIRÚRGICA
+   Verde característico #009F6B
+   Azul francés/celeste #0073CF
+*/
+.mobile-frame.carrera-instrumentacion {
+    --primary-color: #009F6B;
+    --primary-dark: #0073CF;
+    --primary-light: #009F6B;
+    --secondary-color: rgba(0, 159, 107, 0.10);
+    --border-color: rgba(0, 159, 107, 0.30);
+    --color-accent: #0073CF;
+    --bg-career: rgba(0, 159, 107, 0.10);
+}
+
+/* 2. ADMINISTRACIÓN DE EMPRESAS
+   Naranja oscuro (dark orange estándar web) #FF8C00
+   Naranja académico intenso #E65C00
+*/
+.mobile-frame.carrera-administracion {
+    --primary-color: #FF8C00;
+    --primary-dark: #E65C00;
+    --primary-light: #FF8C00;
+    --secondary-color: rgba(255, 140, 0, 0.10);
+    --border-color: rgba(255, 140, 0, 0.30);
+    --color-accent: #E65C00;
+    --bg-career: rgba(255, 140, 0, 0.10);
+}
+
+/* 3. ENFERMERÍA
+   Blanco absoluto #FFFFFF: ya es la base de las tarjetas y
+   fondos claros de toda la app (por eso no se fuerza aparte:
+   un tinte blanco sobre fondo claro no se notaría).
+   Azul Sanitario/Corporativo #4584E5 (principal) y #23408E
+   (más oscuro, autoridad y calma en headers/botones/texto).
+*/
+.mobile-frame.carrera-enfermeria {
+    --primary-color: #4584E5;
+    --primary-dark: #23408E;
+    --primary-light: #4584E5;
+    --secondary-color: rgba(69, 132, 229, 0.09);
+    --border-color: rgba(69, 132, 229, 0.28);
+    --color-accent: #23408E;
+    --bg-career: rgba(69, 132, 229, 0.10);
+}
+
+/* 4. DISEÑO Y PROGRAMACIÓN WEB (modo oscuro)
+   Violeta oscuro #2A085C: acá el color "de fondo" pedido ES
+   el fondo real de la app (no un tinte como en las otras 3),
+   por eso se pisan también las variables de superficie/texto
+   en vez de --bg-career.
+   Violeta eléctrico #A951ED: botones y CTAs.
+   Lavanda clara #E2D4F7: detalle en bordes y acentos. Las
+   "tarjetas" quedan apenas más claras que el fondo (superficie
+   elevada, semi-transparente) en vez de lavanda sólida, para
+   que el texto (--text-dark, claro) se siga leyendo bien tanto
+   dentro de las tarjetas como directamente sobre el fondo.
+*/
+.mobile-frame.carrera-diseno {
+    --primary-color: #2A085C;
+    --primary-dark: #2A085C;
+    --primary-light: #A951ED;
+    --secondary-color: rgba(226, 212, 247, 0.55);
+    --border-color: rgba(42, 8, 92, 0.18);
+    --career-border: rgba(42, 8, 92, 0.18);
+    --career-bg: rgba(226, 212, 247, 0.26);
+    --career-bg-strong: rgba(169, 81, 237, 0.075);
+    --text-light: #6b5d7b;
+}
+
+.mobile-frame.carrera-diseno .header-profesor,
+.mobile-frame.carrera-diseno .carrera-badge,
+.mobile-frame.carrera-diseno .banner-carrera,
+.mobile-frame.carrera-diseno .payment-status-card {
+    background: linear-gradient(135deg, #2A085C, #A951ED);
+}
+
+.mobile-frame.carrera-diseno .nav-item.active,
+.mobile-frame.carrera-diseno .btn-calendar-nav,
+.mobile-frame.carrera-diseno .tab.active,
+.mobile-frame.carrera-diseno .btn-back,
+.mobile-frame.carrera-diseno .btn-icon {
+    color: #2A085C;
+}
+
+.mobile-frame.carrera-diseno .tab.active {
+    border-bottom-color: #A951ED;
+}
+.mobile-frame.carrera-diseno .btn-primary {
+    background: #2A085C;
+}
+.mobile-frame.carrera-diseno .btn-primary:hover {
+    background: #A951ED;
+}
+.mobile-frame.carrera-diseno .btn-secondary {
+    color: #2A085C;
+    border-color: #A951ED;
+    background: #E2D4F7;
+}
+.mobile-frame.carrera-diseno .calendar-day.today {
+    background: #2A085C;
+}
+
+/* Los emojis no aceptan color CSS en muchos sistemas operativos.
+   Este filtro les da una dominante coherente con cada carrera sin
+   reemplazar el significado del ícono. */
+.mobile-frame.carrera-instrumentacion .menu-icon,
+.mobile-frame.carrera-instrumentacion .nav-icon,
+.mobile-frame.carrera-instrumentacion .list-icon,
+.mobile-frame.carrera-instrumentacion .news-icon,
+.mobile-frame.carrera-instrumentacion .event-icon,
+.mobile-frame.carrera-instrumentacion .method-icon {
+    filter: sepia(0.55) saturate(1.7) hue-rotate(105deg);
+}
+
+.mobile-frame.carrera-administracion .menu-icon,
+.mobile-frame.carrera-administracion .nav-icon,
+.mobile-frame.carrera-administracion .list-icon,
+.mobile-frame.carrera-administracion .news-icon,
+.mobile-frame.carrera-administracion .event-icon,
+.mobile-frame.carrera-administracion .method-icon {
+    filter: sepia(0.8) saturate(2.0) hue-rotate(345deg);
+}
+
+.mobile-frame.carrera-enfermeria .menu-icon,
+.mobile-frame.carrera-enfermeria .nav-icon,
+.mobile-frame.carrera-enfermeria .list-icon,
+.mobile-frame.carrera-enfermeria .news-icon,
+.mobile-frame.carrera-enfermeria .event-icon,
+.mobile-frame.carrera-enfermeria .method-icon {
+    filter: sepia(0.25) saturate(1.5) hue-rotate(175deg);
+}
+
+.mobile-frame.carrera-diseno .menu-icon,
+.mobile-frame.carrera-diseno .nav-icon,
+.mobile-frame.carrera-diseno .list-icon,
+.mobile-frame.carrera-diseno .news-icon,
+.mobile-frame.carrera-diseno .event-icon,
+.mobile-frame.carrera-diseno .method-icon {
+    filter: sepia(0.45) saturate(2.1) hue-rotate(245deg);
+}
+
+/* Hover y foco: usan el color de la carrera */
+.mobile-frame[class*="carrera-"] .menu-item:hover,
+.mobile-frame[class*="carrera-"] .list-item:hover,
+.mobile-frame[class*="carrera-"] .news-item:hover,
+.mobile-frame[class*="carrera-"] .payment-method:hover {
+    border-color: var(--primary-light);
+}
+
+.mobile-frame[class*="carrera-"] .menu-item:focus-visible,
+.mobile-frame[class*="carrera-"] button:focus-visible,
+.mobile-frame[class*="carrera-"] input:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--primary-light) 45%, transparent);
+    outline-offset: 2px;
+}
+
+/* Iconografía: se fuerza una familia de símbolos para que
+   los íconos de navegación adopten el color de la carrera. */
+.mobile-frame[class*="carrera-"] .menu-icon,
+.mobile-frame[class*="carrera-"] .nav-icon,
+.mobile-frame[class*="carrera-"] .input-icon,
+.mobile-frame[class*="carrera-"] .btn-search {
+    color: var(--primary-color);
+}
+
+.mobile-frame[class*="carrera-"] .grades-summary {
+    background: var(--secondary-color);
+    border-left: 4px solid var(--primary-light);
+}
+
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 480px) {
+    body { background: var(--bg-light); }
+    .mobile-frame {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+    }
+}
